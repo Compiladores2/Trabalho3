@@ -1,0 +1,98 @@
+grammar trabalho3.ReceitaHTML with org.eclipse.xtext.common.Terminals
+
+generate receitaHTML "http://www.ReceitaHTML.trabalho3"
+
+
+
+Receita: 'receita' tipo=Classe '(' name=ID ')' corpo=Corpo;
+
+Tipo:
+	Classe | UnidadeTempo | UnidadeMedida | Cadeia;
+
+Classe:
+	'doce' | 'salgado';
+
+Corpo:
+	necessidades+=Necessidades+ modo=ModoPreparo tempo=TempoPreparo;
+
+Necessidades:
+	utensilios=Utensilios |
+	ingredientes=Ingredientes;
+	//utensilios=Utensilios necessidades=Necessidades |
+	//ingredientes=Ingredientes necessidades=Necessidades;
+	//{Necessidades} Utensilios | Ingredientes | Utensilios Necessidades  | Ingredientes Necessidades;
+
+
+Utensilios:
+	'(' utensilios+=Utensilio (',' utensilios+=Utensilio)* ')';
+
+Utensilio:
+	 name=ID;
+
+Ingredientes:
+//	( '(' ingrediente+=Ingrediente ',' quantidade+=INT ',' tipo+=Tipo ')')*
+//;
+	{Ingredientes} ( '(' ingrediente+=Ingrediente ',' quantidade+=INT ',' tipo+=Tipo ')')*
+;
+
+Ingrediente:
+	name=ID;
+
+UnidadeMedida:
+	'xicara' | 'colherSopa' | 'colherCafe' | 'unidade' | STRING;
+//	{UnidadeMedida} 'xicara' | {UnidadeMedida} 'colherSopa' | {UnidadeMedida} 'colherCafe' | {UnidadeMedida} 'unidade' | medida=Cadeia;
+
+
+ModoPreparo:
+//	'preparo' metodos+=Metodo*;
+	'preparo' metodos+=Metodo+;
+
+Metodo:
+	bater=MetodoBater |
+	untar=MetodoUntar |
+	assar=MetodoAssar |
+	misturar=MetodoMisturar |
+	picar=MetodoPicar |
+	fritar=MetodoFritar |
+	misturar=MetodoMisturar;
+	
+MetodoBater:
+	'bater(' primeiroIngrediente=Ingrediente
+	(',' ingredientes+=Ingrediente)*
+	tempo=Tempo ')';
+
+MetodoUntar:
+	'untar' '(' utensilio=[Utensilio] ',' ingredientes+=[Ingrediente] ')';
+
+MetodoAssar:
+	'assar' '(' tempo=Tempo ')';
+
+MetodoPicar:
+	'picar(' primeiroIngrediente=Ingrediente
+	(',' ingredientes+=Ingrediente)* ')';
+
+MetodoFritar:
+	'fritar(' primeiroIngrediente=Ingrediente
+	(',' ingredientes+=Ingrediente)*
+	tempo=Tempo ')';
+
+MetodoMisturar:
+	'misturar(' primeiroIngrediente=Ingrediente ',' segundoIngrediente=Ingrediente
+	(',' ingredientes+=Ingrediente)* ')'; 
+
+TempoPreparo:
+	tempo=Tempo tipo=Tipo;
+
+UnidadeTempo:
+	'horas' | 'minutos';
+
+//Cadeia: '"' ~('"')* '"';
+Cadeia:
+	STRING;
+
+Tempo:
+	INT (':' INT)*;
+
+//Comentario :  '--' ~('--' | '\n')*  {skip();};
+Comentario:
+	SL_COMMENT;

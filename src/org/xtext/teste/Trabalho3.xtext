@@ -1,0 +1,35 @@
+grammar trabalho3.ReceitaHTML with org.eclipse.xtext.common.Terminals
+
+generate receitaHTML "http://www.ReceitaHTML.trabalho3"
+
+Programa: receitas+=Receita*;
+
+Receita: 'receita' tipo=Classe '(' name=ID ')' corpo=Corpo;
+
+Classe:
+	'doce' | 'salgado';
+
+Corpo:
+	necessidades+=Necessidades+ modoDePreparo+=ModoDePreparo;
+
+ModoDePreparo:
+	'preparo'
+;	
+	
+Necessidades:
+//	utensilios=Utensilios |
+	ingredientes=Ingredientes;
+
+
+Ingredientes:
+	 '(' ingrediente+=Ingrediente ',' quantidade+=INT ',' tipo+=UnidadeDeMedida ')'
+;
+
+Ingrediente:
+	name=ID;
+	
+UnidadeDeMedida:
+	'unidades'
+;
+	
+	

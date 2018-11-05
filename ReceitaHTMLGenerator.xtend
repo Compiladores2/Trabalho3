@@ -11,6 +11,13 @@ import trabalho3.receitaHTML.Ingrediente
 import trabalho3.receitaHTML.Programa
 import trabalho3.receitaHTML.Receita
 import trabalho3.receitaHTML.Utensilio
+import trabalho3.receitaHTML.ModoDePreparo
+import trabalho3.receitaHTML.MetodoBater
+import trabalho3.receitaHTML.MetodoUntar
+import trabalho3.receitaHTML.MetodoAssar
+import trabalho3.receitaHTML.MetodoPicar
+import trabalho3.receitaHTML.MetodoMisturar
+import trabalho3.receitaHTML.MetodoFritar
 
 /**
  * Generates code from your model files on save.
@@ -38,12 +45,16 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 		«e.name»
 		<br>
 			«FOR n:e.corpo.necessidades.filter(Ingrediente)»
-				«n.compileNecessidade» <br/>
+				«n.compileNecessidade» <br>
 			«ENDFOR»
 		<br>
 			«FOR n:e.corpo.necessidades.filter(Utensilio)»
-				«n.compileNecessidade»
+				«n.compileNecessidade» <br>
 			«ENDFOR»
+		<br>
+			«FOR m : e.corpo.modoDePreparo.metodo»
+		    	«m.compileMetodo» <br>
+		    «ENDFOR»
 		<br>
 		</body>
 		</html>
@@ -51,22 +62,22 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
     
     def dispatch compileNecessidade(Ingrediente i) '''Ingrediente: «i.quantidade.intValue» «i.tipo» de «i.name»'''
 	
-	def dispatch compileNecessidade(Utensilio u) '''
-       Utensilio: «u.name»
-	'''
-//
-//«««      «for (ingredientes : necessidades.eAllContents.toIterable.filter(Ingredientes)) {
-//«««                  
-//«««                      ingredientes.compile
-//«««              }»
-//
-//      
-//    '''
-//    
-//    def compile(Ingredientes ingredientes) ''' 
-//
-//       
-//    '''
+	def dispatch compileNecessidade(Utensilio u) '''Utensilio: «u.name»'''
     
-   
+   def dispatch compileMetodo(MetodoBater mb) '''Bata 
+	«IF mb.usoDeIngrediente.length > 1»
+		«FOR ing : mb.usoDeIngrediente»
+			«ing.quantidade» «ing.ingredientes.tipo» de «ing.ingredientes.name», 
+		«ENDFOR»
+	«ELSE»
+		«FOR ing : mb.usoDeIngrediente»
+				«ing.quantidade» «ing.ingredientes.tipo» de «ing.ingredientes.name» 
+		«ENDFOR»
+	«ENDIF»
+	por «mb.tempo.toString»'''
+   def dispatch compileMetodo(MetodoUntar mu) '''Método: Untar'''
+   def dispatch compileMetodo(MetodoAssar ma) '''Método: Assar'''
+   def dispatch compileMetodo(MetodoMisturar mm) '''Método: Misturar'''
+   def dispatch compileMetodo(MetodoPicar mp) '''Método: Picar'''
+   def dispatch compileMetodo(MetodoFritar mf) '''Método: Fritar'''
 }

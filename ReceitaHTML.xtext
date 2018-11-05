@@ -7,19 +7,20 @@ Programa: receitas+=Receita*;
 Receita: 'receita' tipo=Classe '(' name=ID ')' corpo=Corpo;
 
 Classe:
-	'doce' | 'salgado';
+	'doce' | 'salgado'
+;
 
 Corpo:
 	necessidades+=Necessidade+ modoDePreparo=ModoDePreparo;
 
 ModoDePreparo:
-	'preparo'
-//	acoes += Acao*
+	'preparo' metodo+=Metodo+
 ;	
 	
 Necessidade:
 	Ingrediente |
-	Utensilio;
+	Utensilio
+;
 
 
 Ingrediente:
@@ -35,6 +36,52 @@ UnidadeDeMedida:
 ;
 
 // Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
+// Adicionar quantidade e unidade de medida em cada metodo para verificar se a unidade de medida é valida, alem da quantidade
 
-	
-	
+Metodo:
+	MetodoBater |
+	MetodoUntar |
+	MetodoAssar |
+	MetodoMisturar |
+	MetodoPicar |
+	MetodoFritar
+	;
+
+MetodoBater:
+	'bater' '(' usoDeIngrediente+=IngredienteASerUsado 
+	(',' usoDeIngrediente+=IngredienteASerUsado)*
+	',' tempo=Tempo ')'
+;
+
+IngredienteASerUsado:
+	ingredientes=[Ingrediente] ',' quantidade=INT
+;
+
+MetodoUntar:
+	'untar' '(' utensilio=[Utensilio] ','
+	ingredientes+=[Ingrediente] ')'
+;
+
+MetodoAssar:
+	'assar' '(' tempo=Tempo ')'
+;
+
+MetodoPicar:
+	'picar' '(' ingredientes+=[Ingrediente]
+	(',' ingredientes+=[Ingrediente])* ')'
+;
+
+MetodoFritar:
+	'fritar' '(' ingredientes+=[Ingrediente]
+	(',' ingredientes+=[Ingrediente])*
+	tempo=Tempo ')'
+;
+
+MetodoMisturar:
+	'misturar' '(' ingredientes+=[Ingrediente]
+	(',' ingredientes+=[Ingrediente])+ ')'
+;
+
+Tempo:
+	INT (':' INT)*
+;

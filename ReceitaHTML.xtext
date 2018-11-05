@@ -1,0 +1,40 @@
+grammar trabalho3.ReceitaHTML with org.eclipse.xtext.common.Terminals
+
+generate receitaHTML "http://www.ReceitaHTML.trabalho3"
+
+Programa: receitas+=Receita*;
+
+Receita: 'receita' tipo=Classe '(' name=ID ')' corpo=Corpo;
+
+Classe:
+	'doce' | 'salgado';
+
+Corpo:
+	necessidades+=Necessidade+ modoDePreparo=ModoDePreparo;
+
+ModoDePreparo:
+	'preparo'
+//	acoes += Acao*
+;	
+	
+Necessidade:
+	Ingrediente |
+	Utensilio;
+
+
+Ingrediente:
+	 '(' name=ID ',' quantidade=INT ',' tipo=UnidadeDeMedida ')'
+;
+
+Utensilio:
+	'(' name=ID ')'
+;
+	
+UnidadeDeMedida:
+	'unidades'
+;
+
+// Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
+
+	
+	

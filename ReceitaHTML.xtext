@@ -1,3 +1,4 @@
+
 grammar trabalho3.ReceitaHTML with org.eclipse.xtext.common.Terminals
 
 generate receitaHTML "http://www.ReceitaHTML.trabalho3"
@@ -59,29 +60,33 @@ IngredienteASerUsado:
 
 MetodoUntar:
 	'untar' '(' utensilio=[Utensilio] ','
-	ingredientes+=[Ingrediente] ')'
+	ingredientes=[Ingrediente] ')'
 ;
 
 MetodoAssar:
-	'assar' '(' tempo=Tempo ')'
+	'assar' '(' tempo=Tempo ',' temperatura=Temperatura ')'
 ;
 
 MetodoPicar:
-	'picar' '(' ingredientes+=[Ingrediente]
-	(',' ingredientes+=[Ingrediente])* ')'
+	'picar' '(' usoDeIngrediente+=IngredienteASerUsado
+	(',' usoDeIngrediente+=IngredienteASerUsado)* ')'
 ;
 
 MetodoFritar:
-	'fritar' '(' ingredientes+=[Ingrediente]
-	(',' ingredientes+=[Ingrediente])*
+	'fritar' '(' usoDeIngrediente+=IngredienteASerUsado
+	(',' usoDeIngrediente+=IngredienteASerUsado)*
 	tempo=Tempo ')'
 ;
 
 MetodoMisturar:
-	'misturar' '(' ingredientes+=[Ingrediente]
-	(',' ingredientes+=[Ingrediente])+ ')'
+	'misturar' '(' usoDeIngrediente+=IngredienteASerUsado
+	(',' usoDeIngrediente+=IngredienteASerUsado)+ ')'
 ;
 
 Tempo:
 	INT (':' INT)*
+;
+
+Temperatura:
+	temp=INT medida=('c' | 'f' | 'k')
 ;

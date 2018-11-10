@@ -33,7 +33,8 @@ Utensilio:
 ;
 	
 UnidadeDeMedida:
-	'unidades'
+	'unidades' | 'ml' | 'mg' | 
+	'colherDeSopa' | 'colherDeCha'
 ;
 
 // Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes

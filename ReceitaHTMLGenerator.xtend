@@ -63,7 +63,25 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 		</html>
     '''
     
-    def dispatch compileNecessidade(Ingrediente i) '''Ingrediente: «i.quantidade.intValue» «i.tipo» de «i.name»'''
+    def dispatch compileNecessidade(Ingrediente i) '''Ingrediente: «i.quantidade.intValue»
+    «IF i.tipo == "colherDeSopa"»
+		«IF i.quantidade == 1»
+			colher de sopa
+		«ELSE»
+			colheres de sopa
+		«ENDIF»
+	«ELSE»
+		«IF i.tipo == "colherDeCha"»
+			«IF i.quantidade == 1»
+				colher de cha
+			«ELSE»
+				colheres de cha
+			«ENDIF»
+		«ELSE»
+			«i.tipo»
+		«ENDIF»
+	«ENDIF»
+			 de «i.name»'''
 	
 	def dispatch compileNecessidade(Utensilio u) '''Utensilio: «u.name»'''
     

@@ -1,4 +1,3 @@
-
 grammar trabalho3.ReceitaHTML with org.eclipse.xtext.common.Terminals
 
 generate receitaHTML "http://www.ReceitaHTML.trabalho3"
@@ -40,6 +39,8 @@ UnidadeDeMedida:
 // Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
 // Adicionar quantidade e unidade de medida em cada metodo para verificar se a unidade de medida é valida, alem da quantidade
 
+// Quantidade de ingredientes devem ser float
+
 Metodo:
 	MetodoBater |
 	MetodoUntar |
@@ -52,11 +53,11 @@ Metodo:
 MetodoBater:
 	'bater' '(' usoDeIngrediente+=IngredienteASerUsado 
 	(',' usoDeIngrediente+=IngredienteASerUsado)*
-	',' tempo=Tempo ')'
+	',' tempo=Tempo ')' '->'
 ;
 
 IngredienteASerUsado:
-	ingredientes=[Ingrediente] ',' quantidade=INT
+	ingredientes=[Ingrediente] ':' quantidade=INT
 ;
 
 MetodoUntar:

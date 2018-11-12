@@ -45,25 +45,34 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 		<body>
 		«e.name»
 		<br>
+		
+		«IF e.corpo.necessidades.filter(Ingrediente) !== null»
+			Ingredientes:<br>
 			«FOR n:e.corpo.necessidades.filter(Ingrediente)»
-				«n.compileNecessidade» <br>
+				«n.compileNecessidade» <br/>
 			«ENDFOR»
 		<br>
+		«ENDIF»
+		
+		«IF e.corpo.necessidades.filter(Utensilio) !== null»
+			Utensilios:<br>
 			«FOR n:e.corpo.necessidades.filter(Utensilio)»
-				«n.compileNecessidade» <br>
+				«n.compileNecessidade»<br/>
 			«ENDFOR»
+		<br>
+		«ENDIF»
 		<br>
 		Modo de Preparo
-		<br>
-			«FOR m : e.corpo.modoDePreparo.metodo»
-		    	«m.compileMetodo»
-		    «ENDFOR»
+				<br>
+					«FOR m : e.corpo.modoDePreparo.metodo»
+				    	«m.compileMetodo»
+				    «ENDFOR»
 		<br>
 		</body>
 		</html>
     '''
     
-    def dispatch compileNecessidade(Ingrediente i) '''Ingrediente: «i.quantidade.intValue»
+    def dispatch compileNecessidade(Ingrediente i) '''«i.quantidade.intValue»
     «IF i.tipo == "colherDeSopa"»
 		«IF i.quantidade == 1»
 			colher de sopa
@@ -83,7 +92,7 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 	«ENDIF»
 			 de «i.name»'''
 	
-	def dispatch compileNecessidade(Utensilio u) '''Utensilio: «u.name»'''
+	def dispatch compileNecessidade(Utensilio u) '''«u.name»'''
     
    def dispatch compileMetodo(MetodoBater mb) '''Bata 
 	«IF mb.usoDeIngrediente.length > 1»
@@ -92,7 +101,7 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 				«ing.quantidade» «ing.ingredientes.tipo» de «ing.ingredientes.name»
 			«ELSE»
 				«IF mb.usoDeIngrediente.last.ingredientes.name == ing.ingredientes.name»
-			 		e «ing.quantidade» «ing.ingredientes.tipo» de «ing.ingredientes.name»
+					e «ing.quantidade» «ing.ingredientes.tipo» de «ing.ingredientes.name»
 				«ELSE»
 					, «ing.quantidade» «ing.ingredientes.tipo» de «ing.ingredientes.name»
 				«ENDIF»

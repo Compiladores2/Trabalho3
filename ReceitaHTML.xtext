@@ -11,7 +11,8 @@ Classe:
 ;
 
 Corpo:
-	necessidades+=Necessidade+ modoDePreparo=ModoDePreparo;
+	necessidades+=Necessidade+ modoDePreparo=ModoDePreparo
+;
 
 ModoDePreparo:
 	'preparo' metodo+=Metodo+
@@ -21,7 +22,6 @@ Necessidade:
 	Ingrediente |
 	Utensilio
 ;
-
 
 Ingrediente:
 	 '(' name=ID ',' quantidade=INT ',' tipo=UnidadeDeMedida ')'
@@ -33,7 +33,7 @@ Utensilio:
 	
 UnidadeDeMedida:
 	'unidades' | 'ml' | 'mg' | 
-	'colherDeSopa' | 'colherDeCha'
+	'colherDeSopa' | 'colherDeCha' //falta completar
 ;
 
 // Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
@@ -53,7 +53,7 @@ Metodo:
 MetodoBater:
 	'bater' '(' usoDeIngrediente+=IngredienteASerUsado 
 	(',' usoDeIngrediente+=IngredienteASerUsado)*
-	',' tempo=Tempo ')' '->'
+	',' tempo=Tempo ')' '->' subProduto=Ingrediente
 ;
 
 IngredienteASerUsado:
@@ -77,16 +77,16 @@ MetodoPicar:
 MetodoFritar:
 	'fritar' '(' usoDeIngrediente+=IngredienteASerUsado
 	(',' usoDeIngrediente+=IngredienteASerUsado)*
-	tempo=Tempo ')'
+	tempo=Tempo ')' //subproduto?
 ;
 
 MetodoMisturar:
 	'misturar' '(' usoDeIngrediente+=IngredienteASerUsado
-	(',' usoDeIngrediente+=IngredienteASerUsado)+ ')'
+	(',' usoDeIngrediente+=IngredienteASerUsado)+ ')' //subproduto
 ;
 
 Tempo:
-	INT (':' INT)*
+	INT (':' INT)* //adicionar unidade de tempo
 ;
 
 Temperatura:

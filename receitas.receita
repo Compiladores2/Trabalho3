@@ -1,0 +1,17 @@
+receita doce(BoloSimples)
+(acucar, 2, xicaraDeCha)
+(trigo, 3, xicaraDeCha)
+(margarina, 4, colherDeSopa)
+(clara, 3, unidade)
+(gema, 3, unidade)
+(leite, 1, xicaraDeCha)
+(fermento, 1, colherDeSopa)
+(forma)
+preparo
+bater(clara: 3, 5min) -> (claraEmNeve, 150, mg)
+misturar(gema : 3, margarina : 4, acucar : 2,
+	leite : 1, trigo : 3, claraEmNeve : 150, 
+	fermento : 1) -> (massa, 500, mg)
+untar(forma, margarina)
+assar(massa : 500,40min, 180c)
+

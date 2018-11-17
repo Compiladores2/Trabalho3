@@ -32,8 +32,9 @@ Utensilio:
 ;
 	
 UnidadeDeMedida:
-	'unidades' | 'ml' | 'mg' | 
-	'colherDeSopa' | 'colherDeCha' //falta completar
+	'unidade' | 'ml' | 'mg' | 
+	'colherDeSopa' | 'colherDeCha' |
+	'xicaraDeCha' //falta completar
 ;
 
 // Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
@@ -66,7 +67,7 @@ MetodoUntar:
 ;
 
 MetodoAssar:
-	'assar' '(' tempo=Tempo ',' temperatura=Temperatura ')'
+	'assar' '(' usoDeIngrediente+=IngredienteASerUsado ',' tempo=Tempo ',' temperatura=Temperatura ')'
 ;
 
 MetodoPicar:
@@ -82,11 +83,11 @@ MetodoFritar:
 
 MetodoMisturar:
 	'misturar' '(' usoDeIngrediente+=IngredienteASerUsado
-	(',' usoDeIngrediente+=IngredienteASerUsado)+ ')' //subproduto
+	(',' usoDeIngrediente+=IngredienteASerUsado)+ ')' '->' subProduto=Ingrediente
 ;
 
 Tempo:
-	INT (':' INT)* //adicionar unidade de tempo
+	quantidade=INT unidade=('min' | 'h' | 's' ) //adicionar unidade de tempo
 ;
 
 Temperatura:

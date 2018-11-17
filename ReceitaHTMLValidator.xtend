@@ -8,6 +8,7 @@ import trabalho3.receitaHTML.Corpo
 import trabalho3.receitaHTML.Ingrediente
 import trabalho3.receitaHTML.IngredienteASerUsado
 import trabalho3.receitaHTML.Metodo
+import trabalho3.receitaHTML.MetodoAssar
 import trabalho3.receitaHTML.MetodoBater
 import trabalho3.receitaHTML.MetodoFritar
 import trabalho3.receitaHTML.MetodoMisturar
@@ -65,6 +66,12 @@ class ReceitaHTMLValidator extends AbstractReceitaHTMLValidator {
 								qtd -= iasu.quantidade
 							}
 						}
+					MetodoAssar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (i == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
 				}
 			}
 			if(qtd < 0) {
@@ -101,12 +108,63 @@ class ReceitaHTMLValidator extends AbstractReceitaHTMLValidator {
 								qtd -= iasu.quantidade
 							}
 						}
+					MetodoAssar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mb.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
 				}
 				
 			}
 			
 			if(qtd < 0) {
 				error("Ingrediente "+mb.subProduto.name+" errado para menos", mb.subProduto, ReceitaHTMLPackage.Literals.INGREDIENTE__QUANTIDADE)
+				//error("Corpo errado", c, ReceitaHTMLPackage.Literals.CORPO__NECESSIDADES)
+			}
+		}
+		
+		for (MetodoMisturar mm : c.modoDePreparo.metodo.filter(MetodoMisturar)) {
+			var qtd = mm.subProduto.quantidade
+			
+			for (Metodo m : c.modoDePreparo.metodo) {
+				switch (m) {
+					MetodoBater:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mm.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoMisturar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mm.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoPicar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mm.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoFritar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mm.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoAssar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mm.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+				}
+				
+			}
+			
+			if(qtd < 0) {
+				error("Ingrediente "+mm.subProduto.name+" errado para menos", mm.subProduto, ReceitaHTMLPackage.Literals.INGREDIENTE__QUANTIDADE)
 				//error("Corpo errado", c, ReceitaHTMLPackage.Literals.CORPO__NECESSIDADES)
 			}
 		}

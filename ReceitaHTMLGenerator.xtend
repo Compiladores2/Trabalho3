@@ -84,7 +84,7 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 		</html>
     '''
     
-    def dispatch compileNecessidade(Ingrediente i) '''<li> «i.quantidade» «i.escreveUnidadeDeMedida» de «i.name» </li>'''
+    def dispatch compileNecessidade(Ingrediente i) '''<li> «escreveNumero(i.quantidade)» «i.escreveUnidadeDeMedida» de «i.name» </li>'''
 	
 	def dispatch compileNecessidade(Utensilio u) '''<li> «u.name» </li>'''
     
@@ -92,65 +92,65 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 	«IF mb.usoDeIngrediente.length > 1»
 		«FOR ing : mb.usoDeIngrediente»
 			«IF mb.usoDeIngrediente.get(0).ingredientes.name == ing.ingredientes.name»
-				«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+				«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
 			«ELSE»
 				«IF mb.usoDeIngrediente.last.ingredientes.name == ing.ingredientes.name»
-					e «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+					e «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
 				«ELSE»
-					, «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+					, «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
 				«ENDIF»
 			«ENDIF»
 		«ENDFOR»
 	«ELSE»
 		«FOR ing : mb.usoDeIngrediente»
-			«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+			«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
 		«ENDFOR»
 	«ENDIF»
-por «mb.tempo.escreveTempo» para fazer «mb.subProduto.quantidade» «mb.subProduto.escreveUnidadeDeMedida» de «mb.subProduto.name».'''
+por «mb.tempo.escreveTempo» para fazer «escreveNumero(mb.subProduto.quantidade)» «mb.subProduto.escreveUnidadeDeMedida» de «mb.subProduto.name».'''
    
    def dispatch compileMetodo(MetodoUntar mu) '''Unte «mu.utensilio.name» usando «mu.ingredientes.name».'''
    
    def dispatch compileMetodo(MetodoAssar ma) '''Asse 
    «FOR ing : ma.usoDeIngrediente»
-		«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+		«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
 	«ENDFOR» 
-a «ma.temperatura.temp» «ma.temperatura.escreveUnidadeDeTemperatura» por «ma.tempo.escreveTempo».'''
+a «escreveNumero(ma.temperatura.temp)» «ma.temperatura.escreveUnidadeDeTemperatura» por «ma.tempo.escreveTempo».'''
    	
    def dispatch compileMetodo(MetodoMisturar mm) '''Misture
    «IF mm.usoDeIngrediente.length > 1»
    		«FOR ing : mm.usoDeIngrediente»
    			«IF mm.usoDeIngrediente.get(0).ingredientes.name == ing.ingredientes.name»
-   				«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   				«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    			«ELSE»
    				«IF mm.usoDeIngrediente.last.ingredientes.name == ing.ingredientes.name»
-   			 		e «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   			 		e «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    				«ELSE»
-   					, «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   					, «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    				«ENDIF»
    			«ENDIF»
    		«ENDFOR»
    	«ELSE»
    		«FOR ing : mm.usoDeIngrediente»
-   			«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   			«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    		«ENDFOR»
-   	«ENDIF» para fazer «mm.subProduto.quantidade» «mm.subProduto.escreveUnidadeDeMedida» de «mm.subProduto.name».'''
+   	«ENDIF» para fazer «escreveNumero(mm.subProduto.quantidade)» «mm.subProduto.escreveUnidadeDeMedida» de «mm.subProduto.name».'''
    	
    def dispatch compileMetodo(MetodoPicar mp) '''Pique 
       «IF mp.usoDeIngrediente.length > 1»
       		«FOR ing : mp.usoDeIngrediente»
       			«IF mp.usoDeIngrediente.get(0).ingredientes.name == ing.ingredientes.name»
-      				«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+      				«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
       			«ELSE»
       				«IF mp.usoDeIngrediente.last.ingredientes.name == ing.ingredientes.name»
-      			 		e «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+      			 		e «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
       				«ELSE»
-      					, «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+      					, «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
       				«ENDIF»
       			«ENDIF»
       		«ENDFOR»
       	«ELSE»
       		«FOR ing : mp.usoDeIngrediente»
-      			«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+      			«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
       		«ENDFOR»
       	«ENDIF».'''
   
@@ -158,46 +158,46 @@ a «ma.temperatura.temp» «ma.temperatura.escreveUnidadeDeTemperatura» por «m
    	«IF mf.usoDeIngrediente.length > 1»
    		«FOR ing : mf.usoDeIngrediente»
    			«IF mf.usoDeIngrediente.get(0).ingredientes.name == ing.ingredientes.name»
-   				«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   				«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    			«ELSE»
    				«IF mf.usoDeIngrediente.last.ingredientes.name == ing.ingredientes.name»
-   			 		e «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   			 		e «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    				«ELSE»
-   					, «ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   					, «escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    				«ENDIF»
    			«ENDIF»
    		«ENDFOR»
    	«ELSE»
    		«FOR ing : mf.usoDeIngrediente»
-   			«ing.quantidade» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
+   			«escreveNumero(ing.quantidade)» «ing.ingredientes.escreveUnidadeDeMedida» de «ing.ingredientes.name»
    		«ENDFOR»
    	«ENDIF»
    por «mf.tempo.escreveTempo».'''
    
    def escreveUnidadeDeMedida(Ingrediente i)'''
 		«IF i.tipo == "colherDeSopa"»
-				«IF i.quantidade == 1»
+				«IF i.quantidade <= 1»
 					colher de sopa
 				«ELSE»
 					colheres de sopa
 				«ENDIF»
 			«ELSE»
 				«IF i.tipo == "colherDeCha"»
-					«IF i.quantidade == 1»
+					«IF i.quantidade <= 1»
 						colher de cha
 					«ELSE»
 						colheres de cha
 					«ENDIF»
 				«ELSE»
 					«IF i.tipo == "xicaraDeCha"»
-						«IF i.quantidade == 1»
+						«IF i.quantidade <= 1»
 							xicara de cha
 						«ELSE»
 							xicaras de cha
 						«ENDIF»
 					«ELSE»
 						«IF i.tipo == "unidade"»
-							«IF i.quantidade == 1»
+							«IF i.quantidade <= 1»
 								unidade
 							«ELSE»
 								unidades
@@ -223,7 +223,15 @@ a «ma.temperatura.temp» «ma.temperatura.escreveUnidadeDeTemperatura» por «m
 	'''
    
    def escreveTempo(Tempo t)'''
-   	«t.quantidade.toString»«t.unidade»
+   «escreveNumero(t.quantidade)»«t.unidade»
+   '''
+   
+   def escreveNumero(Float n)'''
+   «IF n == n.intValue»
+   «n.intValue.toString»
+   «ELSE»
+   «n.toString»
+   «ENDIF»
    '''
 }
 	

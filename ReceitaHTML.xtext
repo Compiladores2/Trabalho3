@@ -2,6 +2,8 @@ grammar trabalho3.ReceitaHTML with org.eclipse.xtext.common.Terminals
 
 generate receitaHTML "http://www.ReceitaHTML.trabalho3"
 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
 Programa: receitas+=Receita*;
 
 Receita: 'receita' tipo=Classe '(' name=ID ')' img+=Imagem* corpo=Corpo;
@@ -28,7 +30,7 @@ Necessidade:
 ;
 
 Ingrediente:
-	 '(' name=ID ',' quantidade=INT ',' tipo=UnidadeDeMedida ')'
+	 '(' name=ID ',' quantidade=Float ',' tipo=UnidadeDeMedida ')'
 ;
 
 Utensilio:
@@ -62,7 +64,7 @@ MetodoBater:
 ;
 
 IngredienteASerUsado:
-	ingredientes=[Ingrediente] ':' quantidade=INT
+	ingredientes=[Ingrediente] ':' quantidade=Float
 ;
 
 MetodoUntar:
@@ -91,9 +93,11 @@ MetodoMisturar:
 ;
 
 Tempo:
-	quantidade=INT unidade=('min' | 'h' | 's' ) //adicionar unidade de tempo
+	quantidade=Float unidade=('min' | 'h' | 's' ) //adicionar unidade de tempo
 ;
 
 Temperatura:
-	temp=INT medida=('c' | 'f' | 'k')
+	temp=Float medida=('c' | 'f' | 'k')
 ;
+
+Float returns ecore::EFloat: INT? ('.' INT)?;

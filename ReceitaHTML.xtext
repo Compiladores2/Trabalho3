@@ -4,10 +4,14 @@ generate receitaHTML "http://www.ReceitaHTML.trabalho3"
 
 Programa: receitas+=Receita*;
 
-Receita: 'receita' tipo=Classe '(' name=ID ')' corpo=Corpo;
+Receita: 'receita' tipo=Classe '(' name=ID ')' img+=Imagem* corpo=Corpo;
 
 Classe:
 	'doce' | 'salgado'
+;
+
+Imagem:
+	'img' '('name=STRING')'
 ;
 
 Corpo:
@@ -17,7 +21,7 @@ Corpo:
 ModoDePreparo:
 	'preparo' metodo+=Metodo+
 ;	
-	
+
 Necessidade:
 	Ingrediente |
 	Utensilio

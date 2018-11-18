@@ -1,4 +1,5 @@
 receita doce(BoloSimples)
+img("bolosimples.jpg")
 (acucar, 2, xicaraDeCha)
 (trigo, 3, xicaraDeCha)
 (margarina, 4, colherDeSopa)
@@ -14,4 +15,3 @@ misturar(gema : 3, margarina : 4, acucar : 2,
 	fermento : 1) -> (massa, 500, mg)
 untar(forma, margarina)
 assar(massa : 500,40min, 180c)
-

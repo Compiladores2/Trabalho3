@@ -22,12 +22,12 @@ import trabalho3.receitaHTML.ReceitaHTMLPackage
  */
 class ReceitaHTMLValidator extends AbstractReceitaHTMLValidator {
 
-	@Check
+	/* @Check
 	def void checkNameStartsWithCapital(Ingrediente i) {
 		if (!Character.isUpperCase(i.name.charAt(0))) {
 			warning("Name should start with a capital", ReceitaHTMLPackage.Literals.INGREDIENTE__TIPO);
 		}
-	}
+	}*/
 
 	@Check
 	def void checkGreaterThanZero(Ingrediente i) {

@@ -43,38 +43,50 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 		<html>
 		<header><title>Receita «e.tipo.toString()» de «e.name»</title></header>
 		<body>
-		«e.name»
-		<br>
+		<center>
+		<h1> «e.name» </h1>
+		</center>
+		<br><br>
+		<center>
+		«FOR i : e.img»
+			<img src= '«i.name»'>
+			<br>
+		«ENDFOR»
+		</center>
 		
 		«IF e.corpo.necessidades.filter(Ingrediente) !== null»
 			Ingredientes:<br>
+			<ul>
 			«FOR n:e.corpo.necessidades.filter(Ingrediente)»
-				«n.compileNecessidade» <br/>
+				«n.compileNecessidade» 
 			«ENDFOR»
+			</ul>
 		<br>
 		«ENDIF»
 		
 		«IF e.corpo.necessidades.filter(Utensilio) !== null»
 			Utensilios:<br>
+			<ul>
 			«FOR n:e.corpo.necessidades.filter(Utensilio)»
-				«n.compileNecessidade»<br/>
+				«n.compileNecessidade»
 			«ENDFOR»
+			</ul>
 		<br>
 		«ENDIF»
 		<br>
 		Modo de Preparo
-				<br>
-					«FOR m : e.corpo.modoDePreparo.metodo»
-				    	«m.compileMetodo»
-				    «ENDFOR»
+		<br>
+		«FOR m : e.corpo.modoDePreparo.metodo»
+		   	«m.compileMetodo»
+		«ENDFOR»
 		<br>
 		</body>
 		</html>
     '''
     
-    def dispatch compileNecessidade(Ingrediente i) '''«i.quantidade» «i.escreveUnidadeDeMedida» de «i.name»'''
+    def dispatch compileNecessidade(Ingrediente i) '''<li> «i.quantidade» «i.escreveUnidadeDeMedida» de «i.name» </li>'''
 	
-	def dispatch compileNecessidade(Utensilio u) '''«u.name»'''
+	def dispatch compileNecessidade(Utensilio u) '''<li> «u.name» </li>'''
     
    def dispatch compileMetodo(MetodoBater mb) '''Bata 
 	«IF mb.usoDeIngrediente.length > 1»

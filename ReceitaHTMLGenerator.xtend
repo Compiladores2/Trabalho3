@@ -28,9 +28,7 @@ import trabalho3.receitaHTML.Utensilio
 class ReceitaHTMLGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-        //val prog = resource as Programa;
         
-        //for( r : prog.receitas ) {
         for (r : resource.allContents.toIterable.filter(Receita)) {
             fsa.generateFile(
                 r.name + ".html",
@@ -53,7 +51,7 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 			<br>
 		«ENDFOR»
 		</center>
-		
+		//Cria lista de Ingredientes
 		«IF e.corpo.necessidades.filter(Ingrediente) != null»
 			<b>Ingredientes:</b><br>
 			<ul>
@@ -63,7 +61,7 @@ class ReceitaHTMLGenerator extends AbstractGenerator {
 			</ul>
 		<br>
 		«ENDIF»
-		
+		//Cria lista de Utensilios
 		«IF e.corpo.necessidades.filter(Utensilio) != null»
 			<b>Utensilios:</b><br>
 			<ul>

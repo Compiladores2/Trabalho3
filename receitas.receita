@@ -43,6 +43,13 @@ untar(forma, margarina)
 assar(massa : 500,40min, 180c)
 
 
+// Caso de erro
+//receita doce(ReceitaErrada)
+//(ingrediente1, 10, unidade)
+//
+//preparo
+////Quantidade de ingrediente usado maior que o declarado
+//bater(ingrediente1 : 15, 5min) -> (subproduto, 1, unidade)
 
 
 

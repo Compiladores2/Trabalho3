@@ -176,28 +176,28 @@ a «escreveNumero(ma.temperatura.temp)» «ma.temperatura.escreveUnidadeDeTemper
    
    def escreveUnidadeDeMedida(Ingrediente i)'''
 		«IF i.tipo == "colherDeSopa"»
-				«IF i.quantidade <= 1»
+				«IF i.quantidade < 2»
 					colher de sopa
 				«ELSE»
 					colheres de sopa
 				«ENDIF»
 			«ELSE»
 				«IF i.tipo == "colherDeCha"»
-					«IF i.quantidade <= 1»
+					«IF i.quantidade < 2»
 						colher de cha
 					«ELSE»
 						colheres de cha
 					«ENDIF»
 				«ELSE»
 					«IF i.tipo == "xicaraDeCha"»
-						«IF i.quantidade <= 1»
+						«IF i.quantidade < 2»
 							xicara de cha
 						«ELSE»
 							xicaras de cha
 						«ENDIF»
 					«ELSE»
 						«IF i.tipo == "unidade"»
-							«IF i.quantidade <= 1»
+							«IF i.quantidade < 2»
 								unidade
 							«ELSE»
 								unidades

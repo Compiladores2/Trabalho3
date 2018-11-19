@@ -38,9 +38,10 @@ Utensilio:
 ;
 	
 UnidadeDeMedida:
-	'unidade' | 'ml' | 'mg' | 
+	'unidade' | 'ml' | 'mg' |
+	'l' | 'g' | 'kg' |
 	'colherDeSopa' | 'colherDeCha' |
-	'xicaraDeCha' //falta completar
+	'xicaraDeCha'
 ;
 
 // Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
@@ -93,7 +94,7 @@ MetodoMisturar:
 ;
 
 Tempo:
-	quantidade=Float unidade=('min' | 'h' | 's' ) //adicionar unidade de tempo
+	quantidade=Float unidade=('min' | 'h' | 's' )
 ;
 
 Temperatura:

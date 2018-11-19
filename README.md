@@ -26,9 +26,7 @@ Na janela de criação de projetos, selecione a opção Xtext -> Xtext Project e
 Serão disponibilizados os campos de configuração do projeto. Para este projeto, utilizamos as seguintes configurações:
 ```
 Project name: trabalho3
-
 Language name: ReceitaHTML
-
 Language extensions: receita
 ```
 Ao finalizar a configuração, serão criados o projeto principal e quatro derivados (com finais *.ide, *tests, *.ui, *.ui.tests).
@@ -36,23 +34,27 @@ Ao finalizar a configuração, serão criados o projeto principal e quatro deriv
 Os arquivos disponibilizados neste repositório devem ser distribuídos no projeto principal da seguinte forma:
 ```
 ReceitaHTML.xtext: src -> trabalho3
-
 ReceitaHTMLGenerator.xtend: src -> trabalho3.generator
-
 ReceitaHTMLValidator.xtend: src -> trabalho3.validation
 ```
 ## Execução e testes
 Após alocarmos os arquivos em seus respectivos caminhos, podemos gerar os artefatos da gramática. Para isso, abra o arquivo ReceitaHTML.xtext e clique com o botão direito no editor de texto. Selecione a opção
 
-```Run As -> 1 Generate Xtext Artifacts```
+```
+Run As -> 1 Generate Xtext Artifacts
+```
 
 Caso não haja erros, podemos testar a linguagem. No navegador de pacotes, clique com o botão direito no projeto principal (trabalho3) e selecione a opção
 
-```Run As -> 1 Eclipse Application```
+```
+Run As -> 1 Eclipse Application
+```
 
 Uma nova instância do Eclipse será iniciada. Na nova instância, crie um novo projeto:
 
-```File -> New Project -> Java Project```
+```
+File -> New Project -> Java Project
+```
 
 Os arquivos *.receita devem ser importados na pasta src do novo projeto. Automaticamente será gerada uma pasta src-gen com os programas objetos correspondentes.
 

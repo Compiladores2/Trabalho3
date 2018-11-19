@@ -44,11 +44,6 @@ UnidadeDeMedida:
 	'xicaraDeCha'
 ;
 
-// Análise semântica para verificar se no modo de preparo usa a quantidade correta de ingredientes
-// Adicionar quantidade e unidade de medida em cada metodo para verificar se a unidade de medida é valida, alem da quantidade
-
-// Quantidade de ingredientes devem ser float
-
 Metodo:
 	MetodoBater |
 	MetodoUntar |

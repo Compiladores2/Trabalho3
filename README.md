@@ -42,7 +42,7 @@ ReceitaHTMLGenerator.xtend: src -> trabalho3.generator
 ReceitaHTMLValidator.xtend: src -> trabalho3.validation
 ```
 ## Execução e testes
-Após alocar os arquivos em seus respectivos caminhos, podemos gerar os artefatos da gramática. Para isso, abra o arquivo ReceitaHTML.xtext e clique com o botão direito no editor de texto. Selecione a opção
+Após alocarmos os arquivos em seus respectivos caminhos, podemos gerar os artefatos da gramática. Para isso, abra o arquivo ReceitaHTML.xtext e clique com o botão direito no editor de texto. Selecione a opção
 
 ```Run As -> 1 Generate Xtext Artifacts```
 

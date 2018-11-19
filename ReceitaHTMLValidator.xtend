@@ -22,13 +22,6 @@ import trabalho3.receitaHTML.ReceitaHTMLPackage
  */
 class ReceitaHTMLValidator extends AbstractReceitaHTMLValidator {
 
-	/* @Check
-	def void checkNameStartsWithCapital(Ingrediente i) {
-		if (!Character.isUpperCase(i.name.charAt(0))) {
-			warning("Name should start with a capital", ReceitaHTMLPackage.Literals.INGREDIENTE__TIPO);
-		}
-	}*/
-
 	@Check
 	def void checkGreaterThanZero(Ingrediente i) {
 		if (i.quantidade <= 0) {
@@ -165,6 +158,51 @@ class ReceitaHTMLValidator extends AbstractReceitaHTMLValidator {
 			
 			if(qtd < 0) {
 				error("Ingrediente "+mm.subProduto.name+" errado para menos", mm.subProduto, ReceitaHTMLPackage.Literals.INGREDIENTE__QUANTIDADE)
+				//error("Corpo errado", c, ReceitaHTMLPackage.Literals.CORPO__NECESSIDADES)
+			}
+		}
+		
+		for (MetodoPicar mp : c.modoDePreparo.metodo.filter(MetodoPicar)) {
+			var qtd = mp.subProduto.quantidade
+			
+			for (Metodo m : c.modoDePreparo.metodo) {
+				switch (m) {
+					MetodoBater:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mp.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoMisturar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mp.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoPicar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mp.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoFritar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mp.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+					MetodoAssar:
+						for (IngredienteASerUsado iasu : m.usoDeIngrediente) {
+							if (mp.subProduto == iasu.ingredientes) {
+								qtd -= iasu.quantidade
+							}
+						}
+				}
+				
+			}
+			
+			if(qtd < 0) {
+				error("Ingrediente "+mp.subProduto.name+" errado para menos", mp.subProduto, ReceitaHTMLPackage.Literals.INGREDIENTE__QUANTIDADE)
 				//error("Corpo errado", c, ReceitaHTMLPackage.Literals.CORPO__NECESSIDADES)
 			}
 		}

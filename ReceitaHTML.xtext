@@ -79,12 +79,12 @@ MetodoAssar:
 
 MetodoPicar:
 	'picar' '(' usoDeIngrediente+=IngredienteASerUsado
-	(',' usoDeIngrediente+=IngredienteASerUsado)* ')'
+	(',' usoDeIngrediente+=IngredienteASerUsado)* ')' '->' subProduto=Ingrediente
 ;
 
 MetodoFritar:
 	'fritar' '(' usoDeIngrediente+=IngredienteASerUsado
-	(',' usoDeIngrediente+=IngredienteASerUsado)*
+	(',' usoDeIngrediente+=IngredienteASerUsado)* ','
 	tempo=Tempo ')' //subproduto?
 ;
 

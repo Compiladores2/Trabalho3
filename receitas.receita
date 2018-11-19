@@ -1,3 +1,29 @@
+receita doce(NomeReceita)
+(ingrediente, 4, unidade)
+
+preparo
+bater(ingrediente : 4, 5min) -> (subproduto, 4, unidade)
+
+
+
+receita salgado(Frittata)
+
+(ovo, 2, unidade)
+(farinhaDeTrigo, 0.5, xicaraDeCha)
+(fermento, 1, colherDeCha)
+(brocolis,1,xicaraDeCha)
+(azeite,1, colherDeSopa)
+(frigideira)
+
+preparo
+bater(ovo:2,3min) -> (ovoBatido,2,unidade)
+bater(ovoBatido:2, farinhaDeTrigo:0.5, fermento:1, 3min) -> (ovoComFarinha, 1, unidade)
+picar(brocolis:1) -> (brocolisPicado, 1, xicaraDeCha)
+misturar(ovoComFarinha:1,brocolisPicado:1) -> (ingrdientesMisturados,1,unidade)
+fritar(ingrdientesMisturados:1, 3min)
+
+
+
 receita doce(BoloSimples)
 img("bolosimples.jpg")
 (acucar, 2, xicaraDeCha)
@@ -15,3 +41,8 @@ misturar(gema : 3, margarina : 4, acucar : 2,
 	fermento : 1) -> (massa, 500, mg)
 untar(forma, margarina)
 assar(massa : 500,40min, 180c)
+
+
+
+
+
